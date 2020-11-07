@@ -93,7 +93,7 @@ public class Main {
 		long t = System.currentTimeMillis();
 		max_min_sum(N,a,b);	
 		long f = System.currentTimeMillis();
-		System.out.println("위 과정을 수행하는데 걸리는 시간은"+(f-t)+"ms 입니다.");		
+		System.out.println("위 과정을 수행하는데 걸리는 시간은"+(f-t)+"초 입니다.");		
 	}
 
 }
