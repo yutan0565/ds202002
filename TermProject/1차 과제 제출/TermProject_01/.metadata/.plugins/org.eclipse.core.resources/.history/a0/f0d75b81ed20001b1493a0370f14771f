@@ -11,7 +11,7 @@ import java.util.Random;
 public class Main {
 	
 	static long max_min_sum(int N, int a, int b) {
-		Random rand = new Random(77);
+		Random rand = new Random();
 		int sum = 0;
 		
 		//배열 만들기
@@ -86,23 +86,9 @@ public class Main {
 		System.out.println("랜덤함수를 통해 생성할 데이터의 개수 N을 입력하세요 : ");
 		int N = sc.nextInt();
 		
-		System.out.println("구간은 1부터 시작 입니다.");
 		System.out.println("구간의 시작(a)과 끝(b)를 입력하세요 : ");
-		
-		//조건에 맞는 숫자 입려가도록 하기
-		boolean valid = true;
-		int a=0, b=0;
-		while(valid) {
-		    a = sc.nextInt();
-			b = sc.nextInt();
-			if( 1<=a && 1<=b  && a < b){
-				valid = false;
-			}
-			else {
-				valid = true;
-				System.out.println("a < b 조건에 맞는 숫자를 입력하세요!!");
-			}		
-		};
+		int a = sc.nextInt();
+		int b = sc.nextInt();
 
 		long t = System.currentTimeMillis();
 		max_min_sum(N,a,b);	
