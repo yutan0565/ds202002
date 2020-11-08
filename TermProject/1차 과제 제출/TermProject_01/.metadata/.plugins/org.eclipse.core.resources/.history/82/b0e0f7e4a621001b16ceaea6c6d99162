@@ -12,7 +12,7 @@ public class Main {
 	
 	static long max_min_sum(int N, int a, int b) {
 		Random rand = new Random(77);
-		long sum = 0;
+		int sum = 0;
 		
 		//배열 만들기
 		int[] array = new int[N];
@@ -61,8 +61,8 @@ public class Main {
 		
 		//최대 최소 설정
 		System.out.println("");
-		long max = new_array[new_array.length-1];
-		long min = new_array[0];
+		int max = new_array[new_array.length-1];
+		int min = new_array[0];
 		
 		System.out.println("");
 		System.out.println("최대값은 "+max);
