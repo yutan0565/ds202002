@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.Scanner;
+
+
+import java.util.List;
+
+
+// hashmap
+
+public class hash_test {
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner sc =new Scanner(System.in);
+		
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();	
+		Random rand = new Random(77);
+		
+		int random_number1,random_number2,a,b;
+		int min = 0, max = 0 ;
+		long sum;
+		
+		int N = sc.nextInt();
+		for(int i = 1 ; i <= N ; i++ ) {
+			map.put( i,rand.nextInt() );
+		}
+	
+		
+		List<Integer> keySetList = new ArrayList<>(map.keySet());
+		
+		// 오름차순
+		System.out.println("------value 오름차순------");
+		Collections.sort(keySetList, (o1, o2) -> (map.get(o1).compareTo(map.get(o2))));
+		
+		for(Integer key : keySetList) {
+			System.out.println("key : " + key + " / " + "value : " + map.get(key));
+		}
+		
+		System.out.print("만들고 싶은 구간의 개수 : ");
+		int K = sc.nextInt();
+		
+		for(int i = 0 ; i < K ; i++) {
+			
+			
+			while(true) {
+				random_number1 = rand.nextInt(N)+1;
+				random_number2 = rand.nextInt(N)+1;
+			
+				if(random_number1 != random_number2) {			
+					break;
+					}
+				}
+				
+				// 범위 설정
+				if(random_number1 > random_number2) {
+					a = random_number2;
+					b = random_number1;						
+				}
+				
+				else {
+					a = random_number1;
+					b = random_number2;		
+				}		
+				
+				
+			for(Integer j : keySetList) {
+				if(j >= a && j <= b) {
+					min = map.get(j);
+					break;
+				}
+			}
+			
+			for(Integer j :keySetList) {
+				if(j >= a && j <= b && map.get(j) > max) {
+						max = map.get(j);
+					}						
+			}
+		System.out.println(map);
+		System.out.println(a+" "+ b);
+		System.out.println(min+"  "+max);
+		
+		}
+		
+
+		
+		
+		
+
+	}
+
+}

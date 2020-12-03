@@ -1,0 +1,67 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
+
+// hashmap
+
+public class hash_test {
+	
+	static int[] tv;	
+	static void merge(Set<Integer> set, int a, int b, int c) {
+
+		int i = a, j = c+1, k = a;
+		while(i<=c && j <= b) {
+			if(set[i] < set[j]) {
+				tv[k++] = set[i++];  
+			}
+			else {
+				tv[k++] = set[j++]; 
+			}
+		}
+		while(i<=c) tv[k++] = set[i++];  
+		while(j<=b) tv[k++] = set[j++];
+		for(i=a;i<=b;i++) set[i] = tv[i];
+	}
+	
+	static void mergeSort(Set<Integer> set, int a, int b) {
+		if(a >= b) return;
+		int c = (a+b)/2;
+		mergeSort(set, a, c);
+		mergeSort(set, c+1, b);
+		merge(set, a, b, c);
+	}
+
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner sc =new Scanner(System.in);
+		
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();	
+		Random rand = new Random(77);
+		
+		int N = sc.nextInt();
+		for(int i = 1 ; i <= N ; i++ ) {
+			map.put(rand.nextInt(), i );
+		}
+		System.out.println();
+		
+		mergeSort(map.keySet(),0,N-1);
+		
+		
+		
+		
+		System.out.println(map.keySet());
+		
+		
+		
+		
+		
+		
+
+	}
+
+}

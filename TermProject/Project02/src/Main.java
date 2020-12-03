@@ -56,7 +56,7 @@ public class Main {
 	// 최대, 최소, 합계 구하기
 	static long max_min_sum(int N, int K) {
 		long t = System.currentTimeMillis();
-		Random rand = new Random();
+		Random rand = new Random(77);
 		long sum = 0;
 				
 		//배열 만들기
@@ -82,8 +82,8 @@ public class Main {
 			
 			// 서로 다른 랜덤 숫자가 나올떄 까지 숫자 뽑아내기
 			while(true) {
-			random_number1 = (int) (Math.random()*(N))+1;
-			random_number2 = (int) (Math.random()*(N))+1;
+			random_number1 = rand.nextInt(N)+1;
+			random_number2 = rand.nextInt(N)+1;
 			if(random_number1 != random_number2) {			
 				break;
 				}
