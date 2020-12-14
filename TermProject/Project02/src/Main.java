@@ -26,21 +26,22 @@ public class Main {
 		
 	//정렬 방식
 	// 1. 기본 정렬 방식 사용
-	static int[] original(int[] new_array) {
-		for(int i=0; i< new_array.length;i++) {
-			for(int p = 0; p< new_array.length-1;p++) {
-				if(new_array[p]>new_array[p+1]) {
-					int temp = new_array[p];
-					new_array[p] = new_array[p+1];
-					new_array[p+1] = temp;
-				}
+	static int[] min_max(int[] new_array) {
+		int min = new_array[0];	
+		int max = new_array[0];
+		int[] result = new int[2];
+		for(int i = 0 ; i < new_array.length ; i++) {
+			if(new_array[i] < min) {
+				min = new_array[i];
 			}
-		}		
-		System.out.print("오름차순 정렬: ");
-		for(int i=0;i < new_array.length; i++) {
-			System.out.print(new_array[i] + " ");
+			if(new_array[i] > max) {
+				max = new_array[i];
+			}
 		}
-		return new_array;		
+		result[0] = min;
+		result[1] = max;
+	
+		return result;		
 	}
 	
 	
@@ -64,14 +65,18 @@ public class Main {
 		for(int i = 0 ; i < N ; i++ ) {
 			array[i] = rand.nextInt();
 		}
-		System.out.println();
+
 		
 		//array 배열 보기
-		System.out.print("랜덤 생성 배열 : ");
+		System.out.println("랜덤 생성 배열  ");
 		for(int i=0; i<array.length; i++) {
 			System.out.print(array[i]+" ");
+			if((i+1) % 3 == 0) {
+				System.out.println();
+			}
 		}
 		System.out.println();
+
 		
 		
 		//시작 끝 구간만 따온 배열 만들기		
@@ -107,32 +112,18 @@ public class Main {
 				new_array[j] = array[i];
 				j++;
 			}
-			System.out.println();
 			///////////////////////////새로운 배열의 합계 구하기(구간 합계)////////////////////////////////////////////
 
 			sum = sum_1(new_array);
-
+			
 			////////////////////////////////////////////////////////////////////////////////////
-						
+		
 			//new_array 배열 보기
-			System.out.print(a+"번쨰 부터 " +b+"까지의 배열 : ");
-			for(int i=0; i< new_array.length; i++) {
-				System.out.print(new_array[i]+" ");
-			}
-			System.out.println();
-			
-			///////////////////////////순서대로 정렬 하기////////////////////////////////////////////
-			
-			int[] sort_new_array = original(new_array);
-			
-			////////////////////////////////////////////////////////////////////////////////////
-						
+			System.out.println("구간 : "+ a+"번 ~ "+b +"번");					
 			//최대 최소 설정
-			System.out.println("");	
-			long max = sort_new_array[sort_new_array.length-1];
-			long min = sort_new_array[0];
-					
-			System.out.println("");
+			int[] result = min_max(new_array);
+			int min = result[0];
+			int max = result[1];
 			System.out.println("최대값은 "+max);
 			System.out.println("최소값은 "+min);
 			System.out.println("합계 "+ sum);	
@@ -141,16 +132,14 @@ public class Main {
 		
 		return t;
 	}
-	
-	
-	
-	
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		Scanner sc =new Scanner(System.in);
 		
+		System.out.println("Term 2 결과 ");
 		System.out.println("랜덤함수를 통해 생성할 데이터의 개수 N을 입력하세요 : ");
 		int N = sc.nextInt();
 		

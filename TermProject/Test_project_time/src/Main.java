@@ -2,8 +2,6 @@ import java.util.Scanner;
 import java.util.Random;
 //rand.nextInt()
 
-/////////////시간 측정용
-
 //과제 1
 // N과 구간 a, b를 입력받고, 출력을내는프로그램을작성합니다.
 // N개의 데이터를 랜덤함수로 생성합니다.
@@ -26,23 +24,25 @@ public class Main {
 	static int[] new_array;
 	static int j;
 		
-	//정렬 방식
-	// 1. 기본 정렬 방식 사용
-	static int[] original(int[] new_array) {
-		for(int i=0; i< new_array.length;i++) {
-			for(int p = 0; p< new_array.length-1;p++) {
-				if(new_array[p]>new_array[p+1]) {
-					int temp = new_array[p];
-					new_array[p] = new_array[p+1];
-					new_array[p+1] = temp;
-				}
+	static int[] min_max(int[] new_array) {
+		int min = new_array[0];	
+		int max = new_array[0];
+		int[] result = new int[2];
+		for(int i = 0 ; i < new_array.length ; i++) {
+			if(new_array[i] < min) {
+				min = new_array[i];
 			}
-		}		
-		return new_array;		
+			if(new_array[i] > max) {
+				max = new_array[i];
+			}
+		}
+		result[0] = min;
+		result[1] = max;
+	
+		return result;		
 	}
 	
 	
-	// 합계 방식
 	static long sum_1(int[] new_array) {
 		long sum = 0;
 		for(int i = 0 ; i < new_array.length ; i++) {
@@ -51,30 +51,23 @@ public class Main {
 		return sum;
 	}
 	
-	
-	// 최대, 최소, 합계 구하기
-	static long max_min_sum(int N, int K) {
-		long t = System.currentTimeMillis();
-		
-		Random rand = new Random();
-		long sum = 0;
 
-		//배열 만들기
+	static void  max_min_sum(int N, int K) {
+		
+		Random rand = new Random(77);
+		long sum = 0;
+				
 		int[] array = new int[N];
 		for(int i = 0 ; i < N ; i++ ) {
 			array[i] = rand.nextInt();
 		}
 
-		
-		
-		//시작 끝 구간만 따온 배열 만들기		
-		//시작과 끝 구간을 랜덤 값으로 생성하기	
+
 		for(int k = 0 ; k < K; k++) {
-			
-			// 서로 다른 랜덤 숫자가 나올떄 까지 숫자 뽑아내기
+
 			while(true) {
-			random_number1 = (int) (Math.random()*(N))+1;
-			random_number2 = (int) (Math.random()*(N))+1;
+			random_number1 = rand.nextInt(N)+1;
+			random_number2 = rand.nextInt(N)+1;
 			if(random_number1 != random_number2) {			
 				break;
 				}
@@ -98,35 +91,19 @@ public class Main {
 				new_array[j] = array[i];
 				j++;
 			}
-	
 			///////////////////////////새로운 배열의 합계 구하기(구간 합계)////////////////////////////////////////////
-		
+
 			sum = sum_1(new_array);
-		
-			////////////////////////////////////////////////////////////////////////////////////
-			///////////////////////////순서대로 정렬 하기////////////////////////////////////////////
-			
-
-			int[] sort_new_array = original(new_array);
-
 			
 			////////////////////////////////////////////////////////////////////////////////////
-			
+			int[] result = min_max(new_array);
+			int min = result[0];
+			int max = result[1];
 
-			
-			//최대 최소 설정
-			long max = sort_new_array[sort_new_array.length-1];
-			long min = sort_new_array[0];
-			
 		}	
-		t =  System.currentTimeMillis() - t;
 		
-		return t;
 	}
-	
-	
-	
-	
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -134,18 +111,43 @@ public class Main {
 		/*
 		System.out.println("N = 100으로 고정,  K는 0 ~ 1000000");
 		for(int K = 0 ; K <= 10000000 ; K+=50000 ) {
-			int N = 100;
-			System.out.println(max_min_sum(N,K));
+			int N = 10;
+			long t = System.currentTimeMillis();
+			max_min_sum(N,K);
+			t =  System.currentTimeMillis() - t;
+			System.out.println(t);
 			}
+	
 		
-		*/
 		System.out.println("K = 100으로 고정,  N은 1 ~ 50000");
-		for(int N = 0 ; N <= 50000 ; N+=500 ) {
+		for(int N = 0 ; N <= 10000000 ; N+=50000 ) {
 			if(N == 0 || N == 1) continue;
-			int K = 100;
-			System.out.println(max_min_sum(N,K));
+			int K = 1;
+			long t = System.currentTimeMillis();
+			max_min_sum(N,K);
+			t =  System.currentTimeMillis() - t;
+			System.out.println(t);
 			}
 		
+			
+		System.out.println("K = 100으로 고정,  N은 1 ~ 1000000");
+		for(int N = 0 ; N <= 1000 ; N+=5 ) {
+			if(N == 0 || N == 1) continue;
+			int K = 1000000;
+			long t = System.currentTimeMillis();
+			max_min_sum(N,K);
+			t =  System.currentTimeMillis() - t;
+			System.out.println(t);
+			}	
+		*/
+		System.out.println("N = 100으로 고정,  K는 0 ~ 1000000");
+		for(int K = 0 ; K <= 100000 ; K+=500 ) {
+			int N = 10000000;
+			long t = System.currentTimeMillis();
+			max_min_sum(N,K);
+			t =  System.currentTimeMillis() - t;
+			System.out.println(t);
+			}
 		
 	}
 }

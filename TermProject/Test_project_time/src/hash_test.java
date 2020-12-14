@@ -79,13 +79,13 @@ public class hash_test {
 			int N = 100;
 			System.out.println(max_min_sum(N,K));
 			}
-		
-		
-		System.out.println("K = 100으로 고정,  N은 1 ~ 50000");
-		for(int N = 0 ; N <= 50000 ; N+=500 ) {
+		/*
+		System.out.println("K = 100으로 고정,  N은 1 ~ 1000000");
+		for(int N = 0 ; N <= 10000000 ; N+=50000 ) {
 			if(N == 0 || N == 1) continue;
 			int K = 100;
 			System.out.println(max_min_sum(N,K));
-			}		
+			}	
+			*/
 	}
 }

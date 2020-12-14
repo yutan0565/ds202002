@@ -1,0 +1,136 @@
+import java.util.Scanner;
+import java.util.Random;
+//rand.nextInt()
+
+//과제 1
+// N과 구간 a, b를 입력받고, 출력을내는프로그램을작성합니다.
+// N개의 데이터를 랜덤함수로 생성합니다.
+// a, b 구간의 최소값 최대값 합계를 구해서 출력합니다.
+
+
+//숫자들을 정렬 하는 방식
+//1. min, max 정한다음 하나씩 비교하기
+//2. 삽입 정렬
+//3. 합병 정렬
+//4. 퀵 정렬
+
+
+
+public class Main {
+	static int random_number1;
+	static int random_number2;
+	static int a;
+	static int b;
+	static int[] new_array;
+	static int j;
+		
+	static int[] min_max(int[] new_array) {
+		int min = new_array[0];	
+		int max = new_array[0];
+		int[] result = new int[2];
+		for(int i = 0 ; i < new_array.length ; i++) {
+			if(new_array[i] < min) {
+				min = new_array[i];
+			}
+			if(new_array[i] > max) {
+				max = new_array[i];
+			}
+		}
+		result[0] = min;
+		result[1] = max;
+	
+		return result;		
+	}
+	
+	
+	static long sum_1(int[] new_array) {
+		long sum = 0;
+		for(int i = 0 ; i < new_array.length ; i++) {
+			sum += new_array[i];
+		}
+		return sum;
+	}
+	
+
+	static void  max_min_sum(int N, int K) {
+		
+		Random rand = new Random(77);
+		long sum = 0;
+				
+		int[] array = new int[N];
+		for(int i = 0 ; i < N ; i++ ) {
+			array[i] = rand.nextInt();
+		}
+
+
+		for(int k = 0 ; k < K; k++) {
+
+			while(true) {
+			random_number1 = rand.nextInt(N)+1;
+			random_number2 = rand.nextInt(N)+1;
+			if(random_number1 != random_number2) {			
+				break;
+				}
+			}
+			
+			// 범위 설정
+			if(random_number1 > random_number2) {
+				a = random_number2;
+				b = random_number1;						
+			}
+			
+			else {
+				a = random_number1;
+				b = random_number2;		
+			}
+	
+			// 새로운 배열 만들기 	
+			new_array = new int[b-a+1];
+			j = 0;
+			for(int i = a-1 ; i <= b-1 ; i++) {
+				new_array[j] = array[i];
+				j++;
+			}
+			///////////////////////////새로운 배열의 합계 구하기(구간 합계)////////////////////////////////////////////
+
+			sum = sum_1(new_array);
+			
+			////////////////////////////////////////////////////////////////////////////////////
+			int[] result = min_max(new_array);
+			int min = result[0];
+			int max = result[1];
+
+		}	
+		
+	}
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		System.out.println("N = 100으로 고정,  K는 0 ~ 1000000");
+		for(int K = 0 ; K <= 10000000 ; K+=50000 ) {
+			int N = 10;
+			long t = System.currentTimeMillis();
+			max_min_sum(N,K);
+			t =  System.currentTimeMillis() - t;
+			System.out.println(t);
+			}
+	
+		/*
+		System.out.println("K = 100으로 고정,  N은 1 ~ 50000");
+		for(int N = 0 ; N <= 10000000 ; N+=50000 ) {
+			if(N == 0 || N == 1) continue;
+			int K = 1;
+			long t = System.currentTimeMillis();
+			max_min_sum(N,K);
+			t =  System.currentTimeMillis() - t;
+			System.out.println(t);
+			}
+		
+			*/
+	}
+}
+
+
